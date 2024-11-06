@@ -1,24 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 body {
-    font-family: 'Poppins', sans-serif; /* Fonte arredondada */
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f7f9fc; /* Fundo mais suave */
+    background-color: #f7f9fc;
     color: #333;
     overflow-x: hidden;
-    transition: background-color 0.3s, color 0.3s; /* Transição suave */
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .dark-mode {
-    background-color: #121212; /* Fundo escuro */
-    color: #ffffff; /* Texto claro */
+    background-color: #121212;
+    color: #ffffff;
 }
 
 header {
-    background: linear-gradient(135deg, #4ab3f4, #2a9df4); /* Gradiente azul */
+    background: linear-gradient(135deg, #4ab3f4, #2a9df4);
     color: #fff;
-    padding: 15px 0; /* Diminuir o padding */
+    padding: 15px 0;
     text-align: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     border-bottom-left-radius: 25px;
@@ -27,31 +27,33 @@ header {
 }
 
 .dark-mode header {
-    background: linear-gradient(135deg, #1e1e1e, #3a3a3a); /* Gradiente escuro */
+    background: linear-gradient(135deg, #1e1e1e, #3a3a3a);
 }
 
 .logo {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .brasao {
-    width: 90px;
+    width: 65px;
     height: auto;
-    margin-right: 10px;
+    margin-bottom: 5px;
 }
 
 .logo h1 {
     margin: 0;
     font-size: 2em;
-    font-weight: 600; /* Peso da fonte mais forte */
-    color: #ffffff; /* Texto claro para contraste */
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7); /* Sombra para legibilidade */
+    font-weight: 600;
+    color: #ffffff;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
 }
 
 .dark-mode .logo h1 {
-    color: #ffffff; /* Texto claro no modo escuro */
+    color: #ffffff;
 }
 
 nav ul {
