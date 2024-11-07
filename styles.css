@@ -471,6 +471,14 @@ footer {
          margin-top: 15px; /* Ajusta o espaço acima do botão */
     }
 
+    .carousel-caption .btn {
+        margin-top: 100px; /* Ajuste do espaçamento para telas menores */
+        width: auto; /* Evita que o botão ocupe toda a largura */
+        padding: 12px 25px; /* Mantém o tamanho do botão adequado */
+        font-size: 1.1em; /* Ajusta o tamanho da fonte */
+        text-align: center; /* Garante que o texto do botão esteja centralizado */
+    }
+
     main {
         padding: 10px; /* Reduzir padding em telas menores */
     }
@@ -518,5 +526,12 @@ footer {
 
     .carousel-caption p {
         font-size: 0.9em; /* Tamanho da fonte reduzido */
+    }
+
+    .carousel-caption .btn {
+        margin-top: 80px; /* Ajusta o espaçamento para telas muito pequenas */
+        width: auto; /* Evita que o botão ocupe toda a largura */
+        padding: 12px 20px; /* Ajuste no padding */
+        font-size: 1em; /* Reduz o tamanho da fonte para telas menores */
     }
 }
