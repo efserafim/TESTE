@@ -205,17 +205,18 @@ footer {
 }
 
 .btn {
-    display: inline-block;
+    display: inline-block; /* Garante que o botão seja exibido como um bloco */
     padding: 12px 25px;
-    background-color: #2a9df4;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 30px;
+    background-color: #2a9df4; /* Cor do botão */
+    color: #fff; /* Cor do texto */
+    text-decoration: none; /* Remove o sublinhado */
+    border-radius: 30px; /* Bordas arredondadas */
     font-size: 1.1em;
     font-weight: 600;
-    margin-top: 20px;
+    margin-top: 20px; /* Espaço acima do botão */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    text-align: center; /* Centraliza o texto */
 }
 
 .dark-mode .btn {
@@ -223,8 +224,8 @@ footer {
 }
 
 .btn:hover {
-    background-color: #1e8fd6;
-    transform: translateY(-4px);
+    background-color: #1e8fd6; /* Cor ao passar o mouse */
+    transform: translateY(-4px); /* Efeito de elevação */
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -463,6 +464,11 @@ footer {
 
     .carousel-caption p {
         font-size: 1em; /* Tamanho da fonte reduzido em telas menores */
+    }
+
+    .btn {
+         width: 100%; /* Botão ocupa toda a largura em dispositivos móveis */
+         margin-top: 15px; /* Ajusta o espaço acima do botão */
     }
 
     main {
