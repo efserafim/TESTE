@@ -1,0 +1,65 @@
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card {
+    width: 28%; /* Largura padrão para telas maiores */
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.card img {
+    width: 100%;
+    height: 180px; /* Altura fixa para a imagem */
+    object-fit: cover;
+    object-position: top;
+    border-radius: 8px;
+}
+
+.card h3 {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.card p {
+    font-size: 1em;
+    color: #555;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .card {
+        width: 45%; /* Ajuste para caber 2 cards por linha em tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        width: 100%; /* Cards ocupam a largura total em dispositivos móveis */
+    }
+}
+
+button {
+    background-color: #2a9df4;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button:hover {
+    background-color: #2388c3;
+}

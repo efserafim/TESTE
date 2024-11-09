@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paróquia</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="index-cards.css">
     <script>
+        // Função para aplicar o modo escuro
         function applyDarkMode() {
             const body = document.body;
             const darkModeEnabled = localStorage.getItem('dark-mode') === 'true';
@@ -20,6 +22,7 @@
             }
         }
 
+        // Função para alternar entre os modos escuro e claro
         function toggleDarkMode() {
             const body = document.body;
             const darkModeEnabled = body.classList.toggle('dark-mode');
@@ -27,27 +30,54 @@
             applyDarkMode();
         }
 
-        window.onload = applyDarkMode;
+        // Função para alternar o menu
+        function toggleMenu() {
+            const navbar = document.getElementById('navbar');
+            navbar.classList.toggle('active');
+        }
+
+        // Função para esconder o 4º card e configurá-lo para ser exibido dinamicamente
+        window.onload = () => {
+            applyDarkMode();
+            document.getElementById('card-4').style.display = 'none'; // Ocultar 4º card ao carregar a página
+        };
+
+        // Função para mostrar/ocultar o 4º card
+        function showMoreCards() {
+            const moreCard = document.getElementById('card-4');
+            const showMoreBtn = document.getElementById('show-more-btn');
+
+            if (moreCard.style.display === 'none') {
+                moreCard.style.display = 'block';
+                showMoreBtn.innerText = 'Mostrar Menos';
+            } else {
+                moreCard.style.display = 'none';
+                showMoreBtn.innerText = 'Mostrar Mais';
+            }
+        }
     </script>
 </head>
 <body>
     <header>
         <div class="mode-toggle">
             <button onclick="toggleDarkMode()" id="mode-toggle">
-                <span id="mode-icon">☀️</span> 
+                <span id="mode-icon">☀️</span>
             </button>
         </div>
         <div class="logo">
-            <img src="./virgem_maria_simbol-removebg-preview (1).png" alt="Brasão" class="brasao">
+            <img src="./mariano-removebg-preview.png" alt="Brasão" class="brasao">
             <h1>Paróquia Nossa Senhora de Nazareth</h1>
         </div>
-        <nav>
+        <!-- Menu de navegação -->
+        <nav id="navbar">
             <ul>
                 <li><a href="index.html">Inicio</a></li>
+                <li><a href="historia.html">História</a></li>
                 <li><a href="horarios.html">Missas</a></li>
                 <li><a href="clero.html">Padres</a></li>
                 <li><a href="eventos.html">Pastorais</a></li>
                 <li><a href="leituras.html">Evangelho</a></li>
+                <li><a href="capelas.html">Capelas</a></li>
             </ul>
         </nav>
     </header>
@@ -59,8 +89,36 @@
             <div class="carousel-caption">
                 <h2>Bem-vindo à nossa Paróquia!</h2>
                 <p>Conheça mais sobre a história de nossa comunidade!</p>
-                <a href="./historia.html" class="btn">Saiba Mais</a>
             </div>
+        </section>
+
+        <section class="cards-section">
+            <h2>Últimas Notícias</h2>
+            <div class="cards-container" id="cards-container">
+                <div class="card" onclick="window.location.href='noticia1.html'">
+                    <img src="./são jose.jpg" alt="Imagem Notícia 1" class="card-img">
+                    <h3>NATAL – 1: PREPAREMOS O NATAL</h3>
+                    <p>Natal significa que Jesus, o Filho de Deus, nasceu... <span class="read-more">Leia mais...</span></p>
+                </div>
+                <div class="card" onclick="window.location.href='noticia2.html'">
+                    <img src="./Santa-Teresa-de-Jesus-Reformadora-do-Carmelo.jpg" alt="Imagem Notícia 2" class="card-img">
+                    <h3>4º morada</h3>
+                    <p>Para começar a falar das quartas moradas, bem necessário é... <span class="read-more">Leia mais...</span></p>
+                </div>
+                <div class="card" onclick="window.location.href='noticia3.html'">
+                    <img src="./formacao_o-sentido-da-vida-segundo-santa-teresinha-do-menino-jesus.jpg" alt="Imagem Notícia 3" class="card-img">
+                    <h3>HISTÓRIA DE UMA ALMA</h3>
+                    <p>A vós, querida Madre, que sois duplamente minha mãe...<span class="read-more">Leia mais...</span></p>
+                </div>
+
+                <!-- 4º card escondido inicialmente -->
+                <div class="card" id="card-4" style="display: none;" onclick="window.location.href='noticia4.html'">
+                    <img src="./formacao_o-sentido-da-vida-segundo-santa-teresinha-do-menino-jesus.jpg" alt="Imagem Notícia 4" class="card-img">
+                    <h3>HISTÓRIA DE UMA ALMA</h3>
+                    <p>A vós, querida Madre, que sois duplamente minha mãe...<span class="read-more">Leia mais...</span></p>
+                </div>
+            </div>
+            <button id="show-more-btn" onclick="showMoreCards()">Mostrar Mais</button>
         </section>
 
         <footer>
