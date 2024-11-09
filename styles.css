@@ -482,8 +482,9 @@ footer {
 }
 
 @media (max-width: 400px) {
-    .logo h1 {
+     .logo h1 {
         font-size: 1.5em;
+        margin-left: -8;
     }
 
     nav ul li {
