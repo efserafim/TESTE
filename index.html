@@ -6,7 +6,81 @@
     <title>Paróquia</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="index-cards.css">
+    <style>
+        /* Estilos para o botão de menu e sua responsividade */
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            font-size: 2em;
+            color: #fff;
+            cursor: pointer;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .menu-toggle:hover {
+            color: #4ab3f4;
+        }
+
+        .dark-mode .menu-toggle {
+            color: #bbb;
+        }
+
+        .dark-mode .menu-toggle:hover {
+            color: #1ebe60;
+        }
+
+        .menu-toggle.open {
+            transform: rotate(90deg); /* Rotação ao abrir */
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background-color: #333;
+                z-index: 1000;
+                padding: 0;
+                transition: max-height 0.3s ease-in-out; /* Transição suave */
+                max-height: 0; /* Inicialmente fechado */
+                overflow: hidden;
+            }
+
+            nav ul.open {
+                display: flex;
+                max-height: 500px; /* Altura suficiente para mostrar todos os itens */
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .dark-mode nav ul {
+                background-color: #1e1e1e;
+            }
+        }
+    </style>
     <script>
+        // Função para alternar entre os modos escuro e claro
+        function toggleDarkMode() {
+            const body = document.body;
+            const darkModeEnabled = body.classList.toggle('dark-mode');
+            localStorage.setItem('dark-mode', darkModeEnabled);
+            applyDarkMode();
+        }
+
+        // Função para alternar o menu
+        function toggleMenu() {
+            const navbar = document.getElementById('navbar');
+            const menuButton = document.querySelector('.menu-toggle');
+            navbar.classList.toggle('open');
+            menuButton.classList.toggle('open');
+        }
+
         // Função para aplicar o modo escuro
         function applyDarkMode() {
             const body = document.body;
@@ -20,20 +94,6 @@
                 document.getElementById('mode-icon').innerHTML = '☀️'; // Sol
                 document.getElementById('mode-text').innerText = 'Modo Escuro';
             }
-        }
-
-        // Função para alternar entre os modos escuro e claro
-        function toggleDarkMode() {
-            const body = document.body;
-            const darkModeEnabled = body.classList.toggle('dark-mode');
-            localStorage.setItem('dark-mode', darkModeEnabled);
-            applyDarkMode();
-        }
-
-        // Função para alternar o menu
-        function toggleMenu() {
-            const navbar = document.getElementById('navbar');
-            navbar.classList.toggle('active');
         }
 
         // Função para esconder o 4º card e configurá-lo para ser exibido dinamicamente
@@ -68,9 +128,13 @@
             <img src="./mariano-removebg-preview.png" alt="Brasão" class="brasao">
             <h1>Paróquia Nossa Senhora de Nazareth</h1>
         </div>
+
         <!-- Menu de navegação -->
-        <nav id="navbar">
-            <ul>
+        <nav>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menu">
+                ☰
+            </button>
+            <ul id="navbar">
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="historia.html">História</a></li>
                 <li><a href="horarios.html">Missas</a></li>

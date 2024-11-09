@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="leitura.css">
     <script>
-      
     window.onload = function() {
         applyDarkMode();  // Garantir que o modo escuro seja aplicado ao carregar a página
     };
@@ -38,81 +37,140 @@
         applyDarkMode();
     }
 
+    function toggleMenu() {
+        const navbar = document.getElementById('navbar');
+        const menuButton = document.querySelector('.menu-toggle');
+        navbar.classList.toggle('open');
+        menuButton.classList.toggle('open');
+    }
 
-        window.onload = applyDarkMode;
+    const apiUrl = 'https://liturgia.up.railway.app/';
+    
+    const headers = {
+        'X-Requested-With': 'XMLHttpRequest',
+    };
 
-        const apiUrl = 'https://liturgia.up.railway.app/';
-        
-        const headers = {
-            'X-Requested-With': 'XMLHttpRequest',
-        };
+    async function fetchLeituraDoDia() {
+        try {
+            console.log('Tentando buscar a leitura do dia...');
+            const response = await fetch(apiUrl, {
+                method: 'GET',
+                headers: headers
+            });
 
-        async function fetchLeituraDoDia() {
-    try {
-        console.log('Tentando buscar a leitura do dia...');
-        const response = await fetch(apiUrl, {
-            method: 'GET',
-            headers: headers
-        });
+            const data = await response.json();
+            console.log('Resposta da API:', data);
 
-        // Verifique a resposta da API no console
-        const data = await response.json();
-        console.log('Resposta da API:', data); // Aqui você verá a estrutura real dos dados
+            if (!data || !data.data || !data.liturgia || !data.cor) {
+                console.error('Campos esperados não encontrados na resposta da API');
+                document.getElementById("leitura").textContent = "Não foi possível carregar a leitura de hoje. A resposta da API não contém os dados esperados.";
+                return;
+            }
 
-        // Verifique se os campos estão presentes
-        if (!data || !data.data || !data.liturgia || !data.cor) {
-            console.error('Campos esperados não encontrados na resposta da API');
-            document.getElementById("leitura").textContent = "Não foi possível carregar a leitura de hoje. A resposta da API não contém os dados esperados.";
-            return;
+            const { data: date, liturgia: entryTitle, cor: color, evangelho, primeiraLeitura, salmo, segundaLeitura } = data;
+
+            let content = `<strong>Data:</strong> ${date || "Não disponível"}<br>`;
+            content += `<strong>Cor Litúrgica:</strong> ${color || "Não disponível"}<br>`;
+            content += `<strong>Liturgia:</strong> ${entryTitle || "Não disponível"}<br><br>`;
+
+            content += `<strong>Primeira Leitura:</strong> ${primeiraLeitura?.referencia || "Não disponível"}<br>`;
+            content += `${primeiraLeitura?.texto || "Não disponível"}<br><br>`;
+
+            content += `<strong>Salmo:</strong> ${salmo?.refrao || "Não disponível"}<br>`;
+            content += `${salmo?.texto || "Não disponível"}<br><br>`;
+
+            content += `<strong>Segunda Leitura:</strong> ${segundaLeitura || "Não disponível"}<br><br>`;
+
+            content += `<strong>Evangelho:</strong> ${evangelho?.referencia || "Não disponível"}<br>`;
+            content += `${evangelho?.texto || "Não disponível"}<br><br>`;
+
+            document.getElementById("leitura").innerHTML = content;
+
+        } catch (error) {
+            console.error("Erro ao carregar a leitura do dia:", error);
+            document.getElementById("leitura").textContent = "Não foi possível carregar a leitura de hoje. Verifique sua conexão e tente novamente.";
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", fetchLeituraDoDia);
+    </script>
+    <style>
+        /* Estilos para o botão de menu e sua responsividade */
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            font-size: 2em;
+            color: #fff;
+            cursor: pointer;
+            transition: color 0.3s, transform 0.3s;
         }
 
-        // Acesse os dados diretamente conforme a resposta da API
-        const { data: date, liturgia: entryTitle, cor: color, evangelho, primeiraLeitura, salmo, segundaLeitura } = data;
+        .menu-toggle:hover {
+            color: #4ab3f4;
+        }
 
-        let content = `<strong>Data:</strong> ${date || "Não disponível"}<br>`;
-        content += `<strong>Cor Litúrgica:</strong> ${color || "Não disponível"}<br>`;
-        content += `<strong>Liturgia:</strong> ${entryTitle || "Não disponível"}<br><br>`;
+        .dark-mode .menu-toggle {
+            color: #bbb;
+        }
 
-        // Primeira Leitura
-        content += `<strong>Primeira Leitura:</strong> ${primeiraLeitura?.referencia || "Não disponível"}<br>`;
-        content += `${primeiraLeitura?.texto || "Não disponível"}<br><br>`;
+        .dark-mode .menu-toggle:hover {
+            color: #1ebe60;
+        }
 
-        // Salmo
-        content += `<strong>Salmo:</strong> ${salmo?.refrao || "Não disponível"}<br>`;
-        content += `${salmo?.texto || "Não disponível"}<br><br>`;
+        .menu-toggle.open {
+            transform: rotate(90deg); /* Rotação ao abrir */
+        }
 
-        // Segunda Leitura (se existir)
-        content += `<strong>Segunda Leitura:</strong> ${segundaLeitura || "Não disponível"}<br><br>`;
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background-color: #333;
+                z-index: 1000;
+                padding: 0;
+                transition: max-height 0.3s ease-in-out; /* Transição suave */
+                max-height: 0; /* Inicialmente fechado */
+                overflow: hidden;
+            }
 
-        // Evangelho
-        content += `<strong>Evangelho:</strong> ${evangelho?.referencia || "Não disponível"}<br>`;
-        content += `${evangelho?.texto || "Não disponível"}<br><br>`;
+            nav ul.open {
+                display: flex;
+                max-height: 500px; /* Altura suficiente para mostrar todos os itens */
+            }
 
-        // Exibir o conteúdo no elemento HTML
-        document.getElementById("leitura").innerHTML = content;
+            .menu-toggle {
+                display: block;
+            }
 
-    } catch (error) {
-        console.error("Erro ao carregar a leitura do dia:", error);
-        document.getElementById("leitura").textContent = "Não foi possível carregar a leitura de hoje. Verifique sua conexão e tente novamente.";
-    }
-}
-
-        document.addEventListener("DOMContentLoaded", fetchLeituraDoDia);
-    </script>
+            .dark-mode nav ul {
+                background-color: #1e1e1e;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="mode-toggle">
             <button onclick="toggleDarkMode()" id="mode-toggle">
-                <span id="mode-icon">☀️</span> 
+                <span id="mode-icon">☀️</span>
             </button>
         </div>
         <div class="logo">
             <img src="./mariano-removebg-preview.png" alt="Brasão" class="brasao">
             <h1>Paróquia Nossa Senhora de Nazareth</h1>
         </div>
+
+        <!-- Menu de navegação -->
         <nav>
-            <ul>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menu">
+                ☰
+            </button>
+            <ul id="navbar">
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="historia.html">História</a></li>
                 <li><a href="horarios.html">Missas</a></li>

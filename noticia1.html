@@ -28,6 +28,13 @@
             applyDarkMode();
         }
 
+        function toggleMenu() {
+            const navbar = document.getElementById('navbar');
+            const menuButton = document.querySelector('.menu-toggle');
+            navbar.classList.toggle('open');
+            menuButton.classList.toggle('open');
+        }
+
         window.onload = applyDarkMode;
     </script>
     <style>
@@ -78,6 +85,63 @@
             font-weight: bold;
             color: #2a9df4;
         }
+
+        /* Estilos para o botão de menu e sua responsividade */
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            font-size: 2em;
+            color: #fff;
+            cursor: pointer;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .menu-toggle:hover {
+            color: #4ab3f4;
+        }
+
+        .dark-mode .menu-toggle {
+            color: #bbb;
+        }
+
+        .dark-mode .menu-toggle:hover {
+            color: #1ebe60;
+        }
+
+        .menu-toggle.open {
+            transform: rotate(90deg); /* Rotação ao abrir */
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background-color: #333;
+                z-index: 1000;
+                padding: 0;
+                transition: max-height 0.3s ease-in-out; /* Transição suave */
+                max-height: 0; /* Inicialmente fechado */
+                overflow: hidden;
+            }
+
+            nav ul.open {
+                display: flex;
+                max-height: 500px; /* Altura suficiente para mostrar todos os itens */
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .dark-mode nav ul {
+                background-color: #1e1e1e;
+            }
+        }
     </style>
 </head>
 <body>
@@ -92,7 +156,10 @@
             <h1>Paróquia Nossa Senhora de Nazareth</h1>
         </div>
         <nav>
-            <ul>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menu">
+                ☰
+            </button>
+            <ul id="navbar">
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="historia.html">História</a></li>
                 <li><a href="horarios.html">Missas</a></li>

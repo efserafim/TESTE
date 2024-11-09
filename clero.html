@@ -27,8 +27,105 @@
             applyDarkMode();
         }
 
+        function toggleMenu() {
+            const navbar = document.getElementById('navbar');
+            const menuButton = document.querySelector('.menu-toggle');
+            navbar.classList.toggle('open');
+            menuButton.classList.toggle('open');
+        }
+
         window.onload = applyDarkMode;
     </script>
+    <style>
+        /* Estilos para o botão de menu e sua responsividade */
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            font-size: 2em;
+            color: #fff;
+            cursor: pointer;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .menu-toggle:hover {
+            color: #4ab3f4;
+        }
+
+        .dark-mode .menu-toggle {
+            color: #bbb;
+        }
+
+        .dark-mode .menu-toggle:hover {
+            color: #1ebe60;
+        }
+
+        .menu-toggle.open {
+            transform: rotate(90deg); /* Rotação ao abrir */
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background-color: #333;
+                z-index: 1000;
+                padding: 0;
+                transition: max-height 0.3s ease-in-out; /* Transição suave */
+                max-height: 0; /* Inicialmente fechado */
+                overflow: hidden;
+            }
+
+            nav ul.open {
+                display: flex;
+                max-height: 500px; /* Altura suficiente para mostrar todos os itens */
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .dark-mode nav ul {
+                background-color: #1e1e1e;
+            }
+        }
+
+        /* Estilos adicionais para os cartões de clero */
+        .clero-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 300px;
+            margin: 10px;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card-img img {
+            width: 100%;
+            height: auto;
+        }
+
+        .card-info {
+            padding: 15px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -42,7 +139,10 @@
             <h1>Paróquia Nossa Senhora de Nazareth</h1>
         </div>
         <nav>
-            <ul>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir menu">
+                ☰
+            </button>
+            <ul id="navbar">
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="historia.html">História</a></li>
                 <li><a href="horarios.html">Missas</a></li>
@@ -59,20 +159,20 @@
         <section class="clero-cards">
             <div class="card">
                 <div class="card-img">
-                    <img src="./padre marcelo.jpg" alt="Pároco" class="person-img">
+                    <img src="./goretti.jpg" alt="Pároco" class="person-img">
                 </div>
                 <div class="card-info">
-                    <h3>Padre João Silva</h3>
+                    <h3>Padre José Goretti Pio</h3>
                     <p><strong>Pároco</strong></p>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-img">
-                    <img src="./padre reginaldo.jpg" alt="Vigário" class="person-img">
+                    <img src="./bruno marinelli.jpg" alt="Vigário" class="person-img">
                 </div>
                 <div class="card-info">
-                    <h3>Padre Pedro Santos</h3>
+                    <h3>Padre Bruno Marinelli</h3>
                     <p><strong>Vigário</strong></p>
                 </div>
             </div>

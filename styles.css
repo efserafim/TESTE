@@ -7,7 +7,7 @@ body {
     background-color: #f7f9fc;
     color: #333;
     overflow-x: hidden;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
 .dark-mode {
@@ -434,27 +434,28 @@ footer {
 }
 
 #mode-toggle {
-    background-color: #4ab3f4;
+    background-color: transparent; /* Torna o fundo transparente */
     border: none;
     color: #fff;
-    font-size: 1em;
+    font-size: 1.5em; /* Aumenta o tamanho do emoji */
     cursor: pointer;
     display: flex;
     align-items: center;
-    padding: 10px 15px;
-    border-radius: 25px;
-    transition: background-color 0.3s, transform 0.3s;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 5px; /* Ajusta o padding para centralizar o emoji */
+    border-radius: 50%; /* Faz o botão redondo */
+    transition: transform 0.3s;
+    box-shadow: none; /* Remove a sombra */
+    margin-left: -20px; /* Desloca ligeiramente para a esquerda */
+    margin-top: -10px;
 }
 
 #mode-toggle:hover {
-    background-color: #1e8fd6;
-    transform: translateY(-2px);
+    transform: scale(1.1); /* Aumenta ligeiramente o emoji ao passar o mouse */
 }
 
 #mode-toggle span {
-    margin-right: 5px;
-    transition: transform 0.3s;
+    margin-right: 0; /* Remove o espaço à direita do emoji */
+    transition: none; /* Remove a transição, já que não há transformação */
 }
 
 .social-button {
